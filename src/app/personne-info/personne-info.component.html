@@ -1,0 +1,156 @@
+<div class="sb-nav-fixed">
+
+    <!-- inclusion d l'entete -->
+    <app-header></app-header>
+
+    <div id="layoutSidenav">
+
+
+        <!-- Menu inclusion  -->
+        <app-left-menu></app-left-menu>
+
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="main">
+                <div class="container-fluid px-2">
+
+                    <div class="container-fluid px-3">
+
+
+                            <div class="card mb-4 mt-4">
+                                <div class="card-body p-2">
+
+                                    <div class="my-4 mx-1 container">
+                                        <button class="btn btn-primary btn-md m-2" onclick="window.print()">
+                                            <i class='fa fa-print'></i> print
+                                        </button>
+
+                                        <button routerLink="/personnel-table" class="btn btn-primary btn-md m-2">
+                                            <i class='fa fa-angle-left'></i> Retour
+                                        </button>
+                                    </div>
+
+                                    <div class=" border p-4 data-to-print my-3 mx-3">
+
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <img [src]="'http://localhost:9090/photo/' + personnel?.photo"
+                                                    style="height: 390px; width: 100%; overflow: auto; object-fit: cover;"
+                                                    class="py-10 rounded" />
+                                            </div>
+
+                                            <div class="col-lg-8 col-md-8 col-xs-8 border">
+
+
+
+                                                
+                                                <ul class="list-group py-2 px-5 info-print d-flex ">
+
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>Personnel</b>
+                                                        <span class="f-right"> {{ personnel?.fullName }} </span>
+                                                    </li>
+
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>Code</b> <span class="">{{ personnel?.code }} </span>
+                                                    </li>
+
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>Adresse</b> <span class="">{{ personnel?.adresse }} </span>
+                                                    </li>
+
+                                                  
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>E-mail adresse</b> <span class="">{{ personnel?.email }} </span>
+                                                    </li>
+                                                    
+
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>Sexe</b>
+                                                        <span class="">
+                                                            <small *ngIf="personnel?.sexe === 'F' "class="badge bg-primary"> Feminin </small>
+
+                                                            <small *ngIf="personnel?.sexe === 'M' "class="badge bg-primary"> Masculin </small>
+                                                        </span>
+                                                    </li>
+
+
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>Actif  </b>
+                                                        <span>
+                                                            <small *ngIf="personnel?.actif"
+                                                                class="badge bg-success">Yes</small>
+
+                                                            <small *ngIf="!personnel?.actif"
+                                                                class="badge bg-danger">No</small>
+                                                        </span>
+                                                    </li>
+
+
+
+                                                    <li class="d-flex justify-content-between px-4 ">
+                                                        <b>Salaire</b> <span class=""> {{ personnel?.salaire }} </span>
+                                                    </li>
+
+
+
+                                                    <li class="d-flex justify-content-between px-4 "> 
+                                                        <b>Equipe </b>
+                                                        <span class=""> {{ personnel?.equipe?.nom }} </span>
+                                                    </li>
+
+
+
+
+                                                    <li class="d-flex justify-content-between px-4 " *ngIf="personnel?.phones">
+                                                        <b>Numero(s) de telephone disponible </b>
+                                                        <span *ngFor="let item of personnel?.phones" class=""> 
+                                                            <span>
+                                                            {{item?.phone }} 
+                                                                <i (click)="deletePhone(item.id)"  class="fa fa-close text-danger"></i>
+                                                            </span>
+                                                         </span>
+                                                    </li>
+
+
+                                                    <li class="d-flex justify-content-between px-4 " *ngIf="personnel?.professions">
+                                                        <b>Profession(s) </b>
+                                                        <span *ngFor="let item of personnel?.professions" class="">
+                                                            <span>
+                                                             {{item?.profession }} 
+
+                                                            <i (click)="deleteProfession(item.id)" class="fa fa-close text-danger"></i>
+                                                            </span>
+                                                        </span>
+                                                    </li>
+
+
+
+
+
+                                                </ul>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                    </div>
+
+
+                </div>
+            </main>
+
+            <!-- <section th:insert="layouts/footer :: footer"></section> -->
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,211 @@
+
+
+    <div class="sb-nav-fixed">
+
+        <!-- inclusion d l'entete -->
+        <app-header ></app-header>
+
+        <div id="layoutSidenav">
+
+
+            <!-- Menu inclusion  -->
+            <app-left-menu ></app-left-menu>
+
+
+            <div id="layoutSidenav_content">
+                <main role="main" class="main">
+                    <div class="container-fluid px-4 my-4">
+
+
+
+                            <div class="row">
+                                <div class="col-xl-3 col-sm-6 col-12">
+                                  <div class="card mt-3">
+                                    <div class="card-content">
+                                      <div class="card-body">
+                                        <div class="media d-flex justify-content-between">
+                                          <div class="align-self-center card-icons">
+                                            <i class="fa fa-table success font-large-2 float-left"></i>
+
+                                          </div>
+                                          <div class="media-body text-right ">
+                                            <h3>{{ totalService }}</h3>
+                                            <span>Total service(s)</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-6 col-12">
+                                  <div class="card mt-3">
+                                    <div class="card-content">
+                                      <div class="card-body">
+                                        <div class="media d-flex justify-content-between">
+                                          <div class="align-self-center card-icons">
+                                            <i class="fa fa-table success font-large-2 float-left"></i>
+
+                                          </div>
+                                          <div class="media-body text-right">
+                                            <h3>{{ totalServiceActive }}</h3>
+                                            <span>Total service active</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xl-3 col-sm-6 col-12">
+                                  <div class="card mt-3">
+                                    <div class="card-content">
+                                      <div class="card-body">
+                                        <div class="media d-flex justify-content-between">
+                                          <div class="align-self-center card-icons">
+                                            <i class="fa fa-table success font-large-2 float-left"></i>
+                                          </div>
+                                          <div class="media-body text-right">
+                                            <h3>{{ pourcentage | number : '1.0-0'  }} %</h3>
+                                            <span> service active</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-6 col-12">
+                                  <div class="card mt-3">
+                                    <div class="card-content">
+                                      <div class="card-body">
+                                        <div class="media d-flex justify-content-between">
+                                          <div class="align-self-center card-icons">
+                                            <i class="fa fa-table success font-large-2 float-left"></i>
+
+                                          </div>
+                                          <div class="media-body text-right">
+                                            <h3>{{ totalEquipe }}</h3>
+                                            <span>Total Equipe(s)</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+
+
+                            <hr/>
+
+
+
+                            <div class="row">
+                              <div class="col-xl-3 col-sm-6 col-12">
+                                <div class="card mt-3">
+                                  <div class="card-content">
+                                    <div class="card-body">
+                                      <div class="media d-flex justify-content-between">
+                                        <div class="align-self-center card-icons">
+                                          <i class="fa fa-users success font-large-2 float-left"></i>
+
+                                        </div>
+                                        <div class="media-body text-right ">
+                                          <h3>{{ totalPersonnel }}</h3>
+                                          <span>Total personnel(s)</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="col-xl-3 col-sm-6 col-12">
+                                <div class="card mt-3">
+                                  <div class="card-content">
+                                    <div class="card-body">
+                                      <div class="media d-flex justify-content-between">
+                                        <div class="align-self-center card-icons">
+                                          <i class="fa fa-table success font-large-2 float-left"></i>
+
+                                        </div>
+                                        <div class="media-body text-right">
+                                          <h3>{{ totalServiceActive }}</h3>
+                                          <span>Total service active</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-xl-3 col-sm-6 col-12">
+                                <div class="card mt-3">
+                                  <div class="card-content">
+                                    <div class="card-body">
+                                      <div class="media d-flex justify-content-between">
+                                        <div class="align-self-center card-icons">
+                                          <i class="fa fa-table success font-large-2 float-left"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                          <h3>{{ pourcentage | number : '1.0-0'  }} %</h3>
+                                          <span>Pourcentage service active</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="col-xl-3 col-sm-6 col-12">
+                                <div class="card mt-3">
+                                  <div class="card-content">
+                                    <div class="card-body">
+                                      <div class="media d-flex justify-content-between">
+                                        <div class="align-self-center card-icons">
+                                          <i class="fa fa-table success font-large-2 float-left"></i>
+
+                                        </div>
+                                        <div class="media-body text-right">
+                                          <h3>{{ totalEquipe }}</h3>
+                                          <span>Total Equipes</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                           </div>
+
+
+
+                           <hr/>
+
+
+
+                           <div class="row">
+                             <div class="col-xl-3 col-sm-6 col-12">
+                               <div class="card mt-3">
+                                 <div class="card-content">
+                                   <div class="card-body">
+                                   hello worl
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+
+                          </div>
+
+
+                    </div>
+                </main>
+
+                <!-- <section th:insert="layouts/footer :: footer"></section> -->
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+

@@ -1,0 +1,339 @@
+<div class="sb-nav-fixed">
+
+    <!-- inclusion d l'entete -->
+    <app-header></app-header>
+
+    <div id="layoutSidenav">
+
+
+        <!-- Menu inclusion  -->
+        <app-left-menu></app-left-menu>
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="main">
+                <div class="container-fluid px-2 py-4">
+
+                    <div class="modal fade " id="serviceModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg serviceModal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-muted" id="exampleModalLabel"> {{info}} service</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <form (ngSubmit)="onSaveService(service)" class="row my-form" novalidate
+                                        #service="ngForm">
+
+
+                                        <div class="row m-auto w-100">
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <label for="nom">Service </label>
+                                                <input type="text" id="nom" minlength="2" maxlength="50" required
+                                                    name="nom" [(ngModel)]="ser.nom" ngModel
+                                                    placeholder="Saisir le nom du service ..." #nom="ngModel" [ngClass]="{'form-control form-control-md outline rounded-0': true ,
+                                                     'is-valid' : nom?.valid && nom?.touched,
+                                                     'is-invalid' : nom?.invalid && nom?.touched
+                                                }" />
+
+                                                <div class="text-danger"
+                                                    *ngIf=" nom?.errors?.['required'] && nom?.touched"> ce champ est
+                                                    requis !
+                                                </div>
+
+
+                                                <div class="text-danger"
+                                                    *ngIf=" nom?.errors?.['minlength'] && nom?.touched"> minlength 2
+                                                    characters!
+                                                </div>
+
+
+
+                                                <div class="text-danger"
+                                                    *ngIf=" nom?.errors?.['maxlength'] && nom?.touched"> maxlength 50
+                                                    characters !
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+
+                                                <label for="price">Service price</label>
+                                                <input type="number" min="1" max="999999999" required ngModel
+                                                    placeholder="Saisir le prix ..." [(ngModel)]="ser.price"
+                                                    #price="ngModel" id="price" name="price" [ngClass]="{'form-control form-control-md': true ,
+                                                   'is-valid' : price?.valid && price?.touched,
+                                                   'is-invalid' : price?.invalid && price?.touched
+                                               }" />
+
+
+                                                <div class="text-danger"
+                                                    *ngIf="price?.errors?.['required'] && price?.touched"> ce champ est
+                                                    requis !
+                                                </div>
+
+
+                                                <div class="text-danger"
+                                                    *ngIf="price?.errors?.['min'] && price?.touched"> mminlength 1!
+                                                </div>
+
+
+
+                                                <div class="text-danger"
+                                                    *ngIf="price?.errors?.['max'] && price?.touched"> valeur trop grande
+                                                    !
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <label for="imageUrl">File description</label>
+                                                <input (change)="onChangeFile($event)"
+                                                    accept="image/png, image/gif, image/jpeg" type="file" id="imageUrl"
+                                                    name="imageUrl" ngModel #imageUrl="ngModel" [ngClass]="{'form-control form-control-md': true ,
+                                                'is-valid' : imageUrl?.valid && imageUrl?.touched ,
+                                                'is-invalid' : imageUrl?.invalid && imageUrl?.touched
+                                                }" />
+
+
+                                                <div class="text-danger"
+                                                    *ngIf=" imageUrl?.errors?.['required'] && imageUrl?.touched"> ce
+                                                    champ est requis !
+                                                </div>
+
+                                                <div class="text-danger"
+                                                    *ngIf=" imageUrl?.errors?.['accept'] && imageUrl?.touched"> ce
+                                                    type image innaceptable
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-check form-switch mt-4 py-1">
+                                                    <input type="checkbox" id="active" name="active" ngModel
+                                                        [checked]="ser?.active" #active="ngModel" [ngClass]="{'form-check-input form-check-input-md': true ,
+                                                    'p-2':true,
+                                                    'is-valid' : active?.valid && active?.touched ,
+                                                    'is-invalid' : active?.invalid && active?.touched
+                                                    }" />
+                                                    <label for="active" class="form-check-label"> active </label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <label for="disponible">Disponible du </label>
+                                                <input required minlength="10" maxlength="255"
+                                                    [(ngModel)]="ser.disponible"
+                                                    placeholder="Saisir l'horaire de fonctionnement ... ex : Du lundi au vendredi de 8hr:00 AM a 4h:30PM"
+                                                    type="text" id="disponible" name="disponible" ngModel
+                                                    #disponible="ngModel" [ngClass]="{'form-control form-control-md': true ,
+                                                'is-valid' : disponible?.valid && disponible?.touched ,
+                                                'is-invalid' : disponible?.invalid && disponible?.touched
+                                                }" />
+
+                                                <div class="text-danger"
+                                                    *ngIf=" disponible?.errors?.['required'] && disponible?.touched"> ce
+                                                    champ est requis !
+                                                </div>
+                                                <div class="text-danger"
+                                                    *ngIf=" disponible?.errors?.['minlenght'] && disponible?.touched">
+                                                    Disponibilite
+                                                    incorrect !
+                                                </div>
+
+                                                <div class="text-danger"
+                                                    *ngIf=" disponible?.errors?.['maxlength'] && disponible?.touched">
+                                                    Disponibilite
+                                                    incorrect !
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                            <div class="col-12 my-2">
+                                                <label for="description">Description</label>
+                                                <textarea ngModel name="description" [(ngModel)]="ser.description"
+                                                    placeholder="Veuillez donner une bref description du service {{ ser.nom }} "
+                                                    #description="ngModel" [ngClass]="{'form-control form-controlp-md textarea': true ,
+                                                'w-100' : true  ,
+                                                'is-valid' : description?.valid && description?.touched ,
+                                                'is-invalid' : description?.invalid && description?.touched
+
+                                                }" name="description" minlength="5" maxlength="500" required>
+
+                                                </textarea>
+
+
+                                                <div class="text-danger"
+                                                    *ngIf=" description?.errors?.['required'] && description?.touched">
+                                                    ce champ est requis !
+                                                </div>
+                                                <div class="text-danger"
+                                                    *ngIf=" description?.errors?.['minlength'] && description?.touched">
+                                                    minlength 5 caracteres !
+                                                </div>
+                                                <div class="text-danger"
+                                                    *ngIf=" description?.errors?.['maxlength'] && description?.touched">
+                                                    maxlength 500 caracteres !
+                                                </div>
+                                            </div>
+
+
+                                            <input *ngIf="ser.id && ser.id != 0" type="hidden"
+                                                class="form-control form-control-md" [(ngModel)]="ser.id" name="id"
+                                                ngModel #id="ngModel" />
+
+                                        </div>
+
+
+                                        <div class="container text-right mt-3 d-flex justify-content-center">
+
+                                            <button type="button" (click)="clear(service)"
+                                                class="btn btn-danger btn-md m-2">
+                                                Vider
+                                                <i class="fa fa-close"></i>
+                                            </button>
+                                            <button type="submit" [disabled]="!service.valid"
+                                                class="btn btn-primary btn-md m-2">
+                                                Valider
+                                                <i [hidden]="valider" class="fa fa-spinner fa-pulse"></i>
+                                            </button>
+
+
+                                        </div>
+
+                                    </form>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="container-fluid p-2">
+
+                        <div class="d-flex justify-content-between my-4">
+
+                            <div class="">
+                                <button (click)="openModal()" class="btn btn-primary btn-md"> <i class="fa fa-plus-circle"
+                                    aria-hidden="true"></i> new service
+                                <i class="fa fa-new"></i>
+                               </button>
+                            </div>
+
+                           <div class="">
+                            <input class="input-search" type="search" #filter (keyup)="onSearch(filter.value)" placeholder="Search..." />
+                           </div>
+
+                        </div>
+
+
+                        <div [hidden]="screenLoader" class="text-center">
+                          <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+
+
+                        <mat-table mat-table matSort [dataSource]="servicesData" class="mat-elevation-z8" >
+
+                            <ng-container matColumnDef="nom">
+                                <mat-header-cell *matHeaderCellDef  class="header-col"> Nom </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.nom}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="active" >
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Active </mat-header-cell>
+                                <mat-cell *matCellDef="let item">
+                                    <small>
+
+                                    <span *ngIf="item?.active" [ngClass]="{
+                                      'badge-round-success' : item?.active
+                                    }" >Yes</span>
+
+                                    <span  *ngIf="!item?.active" [ngClass]="{
+                                      'badge-round-danger' : !item?.active
+                                    }" >No</span> </small>
+
+
+
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="prix">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Prix </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.price | currency : ' HTG ' }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="like">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Like </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.likeUser}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="disponible">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Disponible </mat-header-cell>
+                                <mat-cell *matCellDef="let item" > {{item?.disponible | lowercase }} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="action" >
+                                <mat-header-cell *matHeaderCellDef class="header-col">  </mat-header-cell>
+                                <mat-cell *matCellDef="let item">
+
+                                    <div class="d-flex justify-content-center">
+
+                                        <span class="m-1 action" (click)="openModalUpdate( item?.id )">
+                                            <i class="fa fa-pencil-square-o text-primary" aria-hidden="true"></i>
+                                        </span>
+
+                                        <span class="m-1 action" (click)="onViewService(item?.id)">
+                                            <i class="fa fa-search text-primary" aria-hidden="true"></i>
+                                        </span>
+
+
+                                        <span (click)="onDelete( item?.id )" class="m-1 action">
+                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                                        </span>
+
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+
+                            <mat-header-row *matHeaderRowDef="header"></mat-header-row>
+                            <mat-row class="line" *matRowDef="let row; columns: header;"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator class="p-1 pagination-mat"  [pageSize]="8" [pageSizeOptions]="[ 8, 10 , 15]" showFirstLastButtons>
+                        </mat-paginator>
+
+                    </div>
+
+
+
+                </div>
+            </main>
+
+        </div>
+
+
+    </div>
+</div>

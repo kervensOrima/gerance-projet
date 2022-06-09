@@ -1,0 +1,124 @@
+<div class="sb-nav-fixed">
+
+    <!-- inclusion d l'entete -->
+    <app-header></app-header>
+
+    <div id="layoutSidenav">
+
+
+        <!-- Menu inclusion  -->
+        <app-left-menu></app-left-menu>
+
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="main">
+                <div class="container-fluid px-2">
+
+                    <div class="container-fluid px-3">
+                      
+                        <div class="container-fluid p-1">
+
+                            <div class="card mb-4 mt-4">
+                                <div class="card-body p-2">
+
+                                     <div class="my-4 mx-1 container">
+                                        <button class="btn btn-primary btn-md" onclick="window.print()">
+                                            <i class='fa fa-print'></i> print
+                                        </button>
+
+                                        <button routerLink="/services-all" class="btn btn-primary btn-md m-2">
+                                            <i class='fa fa-angle-left'></i> Retour
+                                        </button>
+                                    </div>
+
+                                    <div class=" border p-3 data-to-print my-4 mx-1">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <img [src]="'http://localhost:9090/photo/' + service?.imageURL"
+                                                    style="height: 390px; width: 100%; overflow: auto; object-fit: cover;"
+                                                    class="py-10 rounded" />
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-xs-8 border">
+
+
+                                                <ul class="list-group py-3 px-3 info-print d-flex">
+
+                                                    <li class="d-flex justify-content-between px-4"><b>Service
+                                                             </b> <span
+                                                            class="f-right"></span>{{ service?.nom }} </li>
+
+                                                    <li class="d-flex justify-content-between px-4"><b>Date existance
+                                                            </b> <span class=""
+                                                            > {{ service?.createDate | date : 'yyyy/mm/dd'}} </span></li>
+
+                                                    <li class="d-flex justify-content-between px-4"><b>Disponibilite
+                                                             </b> <span
+                                                            class="" >{{ service?.disponible }} </span></li>
+
+                                                    <li class="d-flex justify-content-between px-4"><b>Prix service  </b>
+                                                        <span class="" >{{ service?.price | currency : ' HTG ' }} </span>
+                                                    </li>
+
+                                                    <li class="d-flex justify-content-between px-4"><b>description
+                                                             </b> 
+                                                            
+                                                            <span
+                                                            class="" >{{ service?.description}} </span>
+                                                        
+                                                    </li>
+
+
+
+                                                    <li class="d-flex justify-content-between px-4"><b>Active
+                                                             </b> <span>
+                                                            <small *ngIf="service?.active" class="badge bg-success "
+                                                                >disponible</small> 
+                                                            
+                                                            <small *ngIf="!service?.active" 
+                                                                class="badge bg-danger"
+                                                              >non disponible</small>
+                                                        </span></li>
+
+                                                    <li class="d-flex justify-content-between px-4"><b>Aimer par
+                                                             </b> 
+                                                            <span class=""> {{ service?.likeUser }} personne(s)</span></li>
+
+
+                                                    <li>
+                                                        <ul class="list-group">
+                                                            <li *ngFor="let item of service?.equipes" class="d-flex justify-content-between px-4"><b>Equipe responsable
+                                                                </b> <span class=""
+                                                               >   {{ item?.nom }}  </span></li>
+                                                        </ul>
+                                                    </li>
+
+
+
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </main>
+
+            <!-- <section th:insert="layouts/footer :: footer"></section> -->
+        </div>
+
+
+    </div>
+
+
+
+</div>

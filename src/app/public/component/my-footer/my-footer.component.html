@@ -1,0 +1,80 @@
+
+<footer class="container-fluid footer text-white">
+
+    <div class="row mt-5 py-2 py-2">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="container p-2">
+                <h2 class="text-right">Adresse</h2>
+                <ul class="list-group p-3 ">
+                    <li>
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-facebook text-primary"></i> </span> facebook ,
+                       </span> 
+                    </li>
+
+                    <li>
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-instagram text-danger"></i> </span> instagram,
+                       </span> 
+                    </li>
+
+
+                    <li>
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-whatsapp text-success"></i> </span> whatsapp
+                       </span> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="container p-2">
+                <h2 class="text-right">Adresse</h2>
+
+                <ul class="list-group p-3">
+                    <li *ngFor="let item of services">
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-angle-right text-black text-muted "></i>
+                            </span> {{ item?.nom |  uppercase }}.
+                       </span> 
+                    </li>
+
+                </ul>
+           </div>
+        </div>
+
+
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="container p-2">
+                <h2 class="text-right">Adresse</h2>
+
+
+                <ul class="list-group p-3">
+                    <li>
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-facebook text-primary"></i> </span> facebook ,
+                       </span> 
+                    </li>
+
+                    <li>
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-instagram text-danger"></i> </span> instagram,
+                       </span> 
+                    </li>
+
+
+                    <li>
+                        <span class="sociaux-icons mt-2 text-bold text-muted">
+                            <span class="logo-icons "> <i class="fa fa-whatsapp text-success"></i> </span> whatsapp
+                       </span> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="text-muted text-center">
+        Tous droit reserve
+    </div>
+</footer>

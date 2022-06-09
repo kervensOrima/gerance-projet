@@ -1,0 +1,114 @@
+<ng-container>
+    <app-menu> </app-menu>
+</ng-container>
+
+<main role="main" class="container-fluid  p-0 m-0">
+
+    <div [ngClass]="{'container-fluid': true ,
+    'image-font' : true }">
+
+        <div class="container-fluid py-5 text-center " id="gerance">
+
+            <h2 class="text-bold text-white">Gerance + </h2>
+            <p class="text-bold text-white">Soyez a votre aise, on s'en occupe</p>
+
+            <br/>
+            <br/>
+            <button routerLink="/public/demandes" class="text-center btn btn-primary demande"> Votre demande
+                <i class="fa fa-fast-forward" aria-hidden="true"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <br/>
+    <br/>
+
+    <div [hidden]="pageServices" class="text-center">
+      <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+
+    <div *ngIf="pageServices" class="bg-white " id="position">
+
+        <div class="row m-auto px-4 py-2">
+
+
+
+            <div *ngFor="let item of pageServices" class="col-lg-4 col-md-6 col-sm-12 my-2 pageServices">
+                <div class="card border box-service">
+                    <div class="card-header bg-white border-0 py-2 service-name">
+                        {{ item?.nom }}
+                    </div>
+                    <div class="container">
+                        <img [alt]="item.description" [title]="item?.description"
+                        [src]=" 'http://localhost:9090/photo/' + item?.imageURL"
+                        class="card-im-top image-card " />
+                    </div>
+                    <div class="card-body">
+
+                        <div class="card-text  p-1">
+                            <div class="text-left p-1">
+                                <b class='badge bg-warning text-black text-bold p-2'>Prix {{ item?.price | currency : ' HTG ' }} <br />
+                                </b>
+                                <div class="card-text">
+                                    {{ item?.disponible | lowercase }}
+                                </div>
+
+                                <div class="card-text">
+                                    {{ item?.description }}
+                                </div>
+                                <br/>
+                                <div>
+                                    <button [disabled]="this.isLiked === 'liked'" (click)="likeService(item.nom , item.id )"
+                                        class="btn btn-primary btn-sm btn-outline likeButton">
+                                        aimer <i class="fa fa-thumbs-up text-white" aria-hidden="true"></i>
+                                    </button>
+                                   aimee par {{ item?.likeUser }} personne{{ item?.likeUser > 1 ? 's' : '' }}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="container  my-2 mx-4 p-2">
+            <div class="pagination pagination-sm">
+                <div (click)="otherPage('last')" *ngIf="true" class="page-item">
+                    <a class="page-link">
+                        <i class="fa fa-backward" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div *ngFor="let item of total; let i = index" (click)="page(i)" [ngClass]="{'page-item': true ,
+                            'active' : currentPage === i }">
+                    <a class="page-link"> page {{ i }} </a>
+                </div>
+
+                <div (click)="otherPage('next')" *ngIf="true" class="page-item"><a class="page-link">
+                        <i class="fa fa-fast-forward" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<ng-container>
+    <app-my-footer></app-my-footer>
+</ng-container>
+
+
+

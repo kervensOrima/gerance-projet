@@ -1,0 +1,363 @@
+<div class="sb-nav-fixed">
+
+    <!-- inclusion d l'entete -->
+    <app-header></app-header>
+
+    <div id="layoutSidenav">
+
+
+        <!-- Menu inclusion  -->
+        <app-left-menu></app-left-menu>
+
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="main ">
+                <div class="container-fluid px-2 py-4">
+
+
+
+                    <div class="card border rounded-0 mt-4" style="width: 96%; margin: auto; ">
+
+                        <div class="card-content rounded-0">
+                            <!-- <div class="card-header bg-white border-0">
+                                 <pre>
+                                {{ personnel }}
+                                </pre>
+                            </div> -->
+
+                            <div class="card-body p-2">
+
+                                <form (ngSubmit)="onSavePersonnel()" [formGroup]="personnelForm" class="row my-form bg-white  m-auto my-4" novalidate
+                                >
+
+
+                                <div class="row m-auto w-100 py-4" >
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+                                        <label for="fullname">Nom complet</label>
+                                        <input type="text" id="fullname"
+                                            name="fullname"
+                                            formControlName="fullName"
+                                            placeholder="Saisir  le nom complet ..."
+                                            [(ngModel)]="personnel.fullName"
+                                            [ngClass]="{
+                                                    'form-control form-control-md outline rounded-0': true ,
+                                                    'is-valid'  : personnelForm.controls['fullName']?.valid  && personnelForm.controls['fullName']?.touched ,
+                                                    'is-invalid'  : personnelForm.controls['fullName']?.invalid  && personnelForm.controls['fullName']?.touched }"
+                                           />
+
+                                           <span *ngIf="personnelForm.controls['fullName'].errors?.['required'] && personnelForm.controls['fullName']?.touched" class="text-danger">full name required</span>
+                                           <span *ngIf="personnelForm.controls['fullName'].errors?.['minlength'] && personnelForm.controls['fullName']?.touched" class="text-danger">full name min lenght error</span>
+                                           <span *ngIf="personnelForm.controls['fullName'].errors?.['maxlength'] && personnelForm.controls['fullName']?.touched" class="text-danger">full name max lenght required</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+
+                                        <label for="adresse">Adresse</label>
+                                        <input type="text"
+                                           formControlName="adresse"
+                                            placeholder="Saisir l'adresse ..."
+                                            [(ngModel)]="personnel.adresse"
+                                             id="adresse" name="adresse" [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                             'is-valid'  : personnelForm.controls['adresse']?.valid  && personnelForm.controls['adresse']?.touched ,
+                                             'is-invalid'  : personnelForm.controls['adresse']?.invalid  && personnelForm.controls['adresse']?.touched
+                                            }"  />
+
+
+                                           <span *ngIf="personnelForm.controls['adresse'].errors?.['required'] && personnelForm.controls['adresse']?.touched" class="text-danger">full name required</span>
+                                           <span *ngIf="personnelForm.controls['adresse'].errors?.['minlength'] && personnelForm.controls['adresse']?.touched" class="text-danger">full name min lenght error</span>
+                                           <span *ngIf="personnelForm.controls['adresse'].errors?.['maxlength'] && personnelForm.controls['adresse']?.touched" class="text-danger">full name max lenght required</span>
+
+                                    </div>
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+
+                                        <label for="salaire">Salaire</label>
+                                        <input type="number"
+                                            placeholder="Saisir le salaire..."
+                                             id="salaire" name="salaire"
+                                            [(ngModel)]="personnel.salaire"
+                                             formControlName="salaire"
+                                             [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                             'is-valid'  : personnelForm.controls['salaire']?.valid  && personnelForm.controls['salaire']?.touched ,
+                                                'is-invalid' : personnelForm.controls['salaire']?.invalid  && personnelForm.controls['salaire']?.touched
+                                            }"  />
+
+
+                                            <span *ngIf="personnelForm.controls['salaire'].errors?.['required'] && personnelForm.controls['salaire']?.touched" class="text-danger">full name required</span>
+                                           <span *ngIf="personnelForm.controls['salaire'].errors?.['minlength'] && personnelForm.controls['salaire']?.touched" class="text-danger">full name min lenght error</span>
+                                           <span *ngIf="personnelForm.controls['salaire'].errors?.['maxlength'] && personnelForm.controls['salaire']?.touched" class="text-danger">full name max lenght required</span>
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+                                        <label for="photo">Photo </label>
+                                        <input (change)="onChangeFile($event)"
+                                            accept="image/png, image/gif, image/jpeg" type="file" id="photo"
+                                            name="photo"
+                                            formControlName="photo"
+                                            [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                            'is-valid'  : personnelForm.controls['photo']?.valid  && personnelForm.controls['photo']?.touched ,
+                                            'is-invalid'  : personnelForm.controls['photo']?.invalid  && personnelForm.controls['photo']?.touched
+                                        }" />
+
+                                        <span *ngIf="personnelForm.controls['photo'].errors?.['required'] && personnelForm.controls['photo']?.touched" class="text-danger">full name required</span>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pb-2">
+                                        <label for="dateNaissance">Date de naissance</label>
+                                        <input
+                                            formControlName="dateNaissance"
+                                            placeholder="Saisir la date de naissance du personnel..."
+                                            [(ngModel)]="personnel.dateNaissance"
+                                            type="date" id="dateNaissance" name="dateNaissance" [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                            'is-valid'  : personnelForm.controls['dateNaissance']?.valid  && personnelForm.controls['dateNaissance']?.touched ,
+                                            'is-invalid'  : personnelForm.controls['dateNaissance']?.invalid  && personnelForm.controls['dateNaissance']?.touched
+                                        }" />
+
+                                            <span *ngIf="personnelForm.controls['dateNaissance'].errors?.['required'] && personnelForm.controls['dateNaissance']?.touched" class="text-danger">Date naissance required</span>
+                                            <span *ngIf="personnelForm.controls['dateNaissance'].errors?.['min'] && personnelForm.controls['dateNaissance']?.touched" class="text-danger">Date naissance required</span>
+                                            <span *ngIf="personnelForm.controls['dateNaissance'].errors?.['max'] && personnelForm.controls['dateNaissance']?.touched" class="text-danger">Date naissance required</span>
+
+
+
+
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pb-2">
+                                        <label for="email">Adresse email</label>
+                                        <input
+                                            formControlName="email"
+                                            placeholder="Email adresse svp..."
+                                            [(ngModel)]="personnel.email"
+                                            type="email" id="email" name="email" [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                            'is-valid'  : personnelForm.controls['email']?.valid  && personnelForm.controls['email']?.touched ,
+                                            'is-invalid'  : personnelForm.controls['email']?.invalid  && personnelForm.controls['email']?.touched
+                                        }" />
+
+                                            <span *ngIf="personnelForm.controls['email'].errors?.['required'] && personnelForm.controls['email']?.touched" class="text-danger">Email required</span>
+                                            <span *ngIf="personnelForm.controls['email'].errors?.['minlength'] && personnelForm.controls['email']?.touched" class="text-danger">Email min lenght error</span>
+                                            <span *ngIf="personnelForm.controls['email'].errors?.['maxlength'] && personnelForm.controls['email']?.touched" class="text-danger">Email max lenght required</span>
+                                            <span *ngIf="personnelForm.controls['email'].errors?.['email'] && personnelForm.controls['email']?.touched" class="text-danger">Email adress error</span>
+
+                                    </div>
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+
+                                        <div class="form-check form-switch mt-4 py-1">
+
+
+                                            <input type="checkbox" id="actif" name="actif"
+                                               formControlName="actif"
+                                               [checked]="personnel?.actif"
+                                               [ngClass]="{'form-check-input form-check-input-md': true ,
+                                            'p-2':true}"[value]="'F'"  />
+                                            <label for="actif" class="form-check-label"> Etat personnel</label>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+
+                                        <div class="form-check form-switch mt-4 py-1">
+
+                                            <label class="f">Sexe
+
+                                                <input type="radio" id="sexe" name="sexe"
+                                               formControlName="sexe"
+                                               [checked]="personnel?.sexe === 'F'"
+                                               [ngClass]="{' p-2 ': true ,
+                                               'p-2':true}"[value]="'F'"  />
+                                                Feminin
+
+                                                <input type="radio" id="sexe" name="sexe"
+                                                    formControlName="sexe"
+                                                    [checked]="personnel?.sexe === 'M'"
+                                                    [ngClass]="{' p-2 ': true ,
+
+                                                    'p-2':true}"[value]="'M'"  />
+                                                    Masculin
+
+
+
+                                            </label>
+
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 pb-2">
+                                        <div class="" *ngIf="personnel.equipe">
+                                            <table  class="table table-stripped table-bordered table-hover">
+                                            <thead>
+                                               <tr>
+                                                 <th>Id</th>
+                                                 <th>Code</th>
+                                                 <th>Nom</th>
+                                                 <th>Slogan</th>
+                                               </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                 <td>{{ personnel?.equipe?.id}}</td>
+                                                 <td>{{ personnel?.equipe?.code}}</td>
+                                                 <td>{{ personnel?.equipe?.nom}}</td>
+                                                 <td>{{ personnel?.equipe?.slogan}}</td>
+                                              </tr>
+                                            </tbody>
+                                            </table>
+
+                                         </div>
+
+                                        <label for="equipe">Equipe affectee</label>
+                                        <select (change)="onChangeEquipe($event)" class="form-control form-control-md rounded-0" id="equipe" formControlName="equipe" name="equipe">
+                                            <option [selected]="true" [disabled]="true"> Choisir une equipe </option>
+                                            <option [value]="item?.id" [selected]="personnel?.equipe?.id == item?.id"  *ngFor="let item of equipes" > {{ item?.nom }} </option>
+                                        </select>
+
+                                        <div *ngIf="personnelForm.controls['equipe'].errors?.['required'] && personnelForm.controls['equipe']?.touched" class="text-danger">svp choisi une equipe</div>
+
+                                    </div>
+
+
+                                     <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+
+                                      <div class="my-2 d-flex-justify-content-end pb-2">
+                                        <button class="float-end text-success m-2 icon-add btn btn-md py-1" (click)="addPhone()" > <i class="fa fa-plus-circle" aria-hidden="true"></i> New Phone</button>
+                                      </div>
+
+
+
+                                      <div formArrayName="phones" class="pb-2">
+                                          <div *ngFor="let phone of phonesArray?.controls; let p=index;" [formGroupName]="p">
+                                              <div class="">
+
+                                                  <div class="content">
+                                                      <span class="float-end text-success m-2 icon-add" (click)="addPhone()" > <i class="fa fa-plus-circle" aria-hidden="true"></i> </span>
+                                                  <span class="float-end text-danger m-2 icon-add"(click)="removePhone(p)" > <i class="fa fa-minus-circle"></i>  </span>
+
+                                                  </div>
+                                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                                      <label for="phone-{{ p }}">Phone number {{ p + 1 }}</label>
+                                                      <input
+                                                          formControlName="phone"
+                                                          placeholder="Saisir le numero de telephone du personnel ..."
+                                                          type="text" id="phone-{{ p }}" name="phone-{{ p }}" [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                                          'is-valid' : phone.get('phone')?.valid && phone?.touched,
+                                                          'is-invalid' : phone.get('phone')?.invalid && phone?.touched }"
+                                                          />
+
+
+                                                          <small *ngIf=" phone.get('phone')?.errors?.['required'] && phone.get('phone')?.touched " class="text-danger">Field required</small>
+                                                          <small *ngIf=" phone.get('phone')?.errors?.['maxlength'] && phone.get('phone')?.touched " class="text-danger">Max lenght error </small>
+                                                          <small *ngIf=" phone.get('phone')?.errors?.['minlength'] && phone.get('phone')?.touched " class="text-danger">Min lenght error</small>
+
+
+                                                  </div>
+                                                  <input type="hidden"  formControlName="id" name="id" />
+
+                                              </div>
+
+
+                                          </div>
+                                      </div>
+                                     </div>
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pb-2">
+                                      <div class="my-2 d-flex-justify-content-end pb-2">
+                                        <button class="float-end text-success m-2 icon-add btn btn-md py-1" (click)="addProfession()" >      <i class="fa fa-plus-circle" aria-hidden="true"></i> New profession </button>
+                                      </div>
+
+                                      <div formArrayName="professions" class="pb-2">
+                                          <div *ngFor="let profession of professionsArray?.controls; let pr =index;" [formGroupName]="pr">
+                                              <div class="">
+
+                                                  <div class="content">
+                                                      <span class="float-end text-success m-2 icon-add" (click)="addProfession()" > <i class="fa fa-plus-circle" aria-hidden="true"></i> </span>
+                                                  <span class="float-end text-danger m-2 icon-add" (click)="removeProfession(pr)" > <i class="fa fa-minus-circle"></i>  </span>
+                                                  </div>
+
+                                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                                      <label for="profession-{{pr}}">Profession {{ pr + 1 }}</label>
+                                                      <input
+                                                          placeholder="Saisir la date de naissance du personnel..."
+                                                          formControlName="profession"
+                                                          type="text" id="profession-{{pr}}" name="profession-{{pr}}" [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                                          'is-valid' : profession.get('profession')?.valid && profession?.touched,
+                                                          'is-invalid' : profession.get('profession')?.invalid && profession?.touched}" />
+
+                                                          <small *ngIf=" profession.get('profession')?.errors?.['required'] && profession.get('profession')?.touched " class="text-danger">Field required</small>
+                                                          <small *ngIf=" profession.get('profession')?.errors?.['maxlength'] && profession.get('profession')?.touched " class="text-danger">Max lenght error </small>
+                                                          <small *ngIf=" profession.get('profession')?.errors?.['minlength'] && profession.get('profession')?.touched " class="text-danger">Min lenght error</small>
+
+
+                                                  </div>
+                                                  <input type="hidden" formControlName="id" name="id" />
+
+                                              </div>
+
+                                          </div>
+                                      </div>
+                                    </div>
+
+                                    <input type="hidden" [(ngModel)]="personnel.id" formControlName="id" name="id" />
+                                    <input type="hidden" [(ngModel)]="personnel.code" formControlName="code" name="code" />
+
+                                </div>
+
+
+                                <div class="container text-right mt-3 mb-3 d-flex justify-content-center">
+
+                                    <button type="button" (click)="clear()"
+                                        class="btn btn-danger btn-md m-2">
+                                        clear
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                    <button type="submit"
+                                       [disabled]="!personnelForm.valid"
+                                        class="btn btn-primary btn-md m-2">
+                                        save <i class="fa fa-save"></i>
+                                    </button>
+
+
+                                </div>
+
+                               </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </main>
+
+        </div>
+
+
+    </div>
+</div>

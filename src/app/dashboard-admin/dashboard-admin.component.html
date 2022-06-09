@@ -1,0 +1,178 @@
+
+
+    <div class="sb-nav-fixed">
+
+        <!-- inclusion d l'entete -->
+        <app-header ></app-header>
+
+        <div id="layoutSidenav">
+
+
+            <!-- Menu inclusion  -->
+            <app-left-menu ></app-left-menu>
+
+
+            <div id="layoutSidenav_content">
+                <main role="main" class="main">
+                    <div class="container-fluid px-2">
+
+                        <div class="card bg-white rounded-0 my-4 mx-2">
+
+                            <div class="card-header bg-white" >
+                                <div class="info py-2">
+                                    <span>
+                                       {{ today | json }} demandes de service  no rendu cet semaine
+                                    </span>
+
+                                    <span>
+                                        3 demandes de service  rendu cet semaine
+                                     </span>
+
+
+                                </div>
+                                <div class="mes-boutons py-2 d-flex justify-content-start">
+                                    <button class="btn btn-outline-primary btn-md">
+                                        <i class="fa fa-eye"></i> Recent
+                                    </button>
+                                    &nbsp;
+                                    &nbsp;
+                                    <button class="btn btn-outline-primary btn-md">
+                                        <i class="fa fa-eye"></i>  Old
+                                    </button>
+
+                                    &nbsp;
+                                    &nbsp;
+
+                                    <label class="form-label p-1">Size</label>    &nbsp;
+                                    <select class="" (change)="onChangeSize($event)">
+                                        <option [value]="5" > 5 </option>
+                                        <option [value]="10"> 10 </option>
+                                        <option [value]="10"> 15 </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="card-body bg-white" style="overflow: auto;" >
+
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ACTION</th>
+                                            <th>NOM COMPLET</th>
+                                            <th>ADRESSE</th>
+                                            <th>EMAIL</th>
+                                            <th>DATE DEMANDE</th>
+                                            <th class="text-center">VALID</th>
+                                            <th>ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of page?.content">
+                                           <td (click)="onChowInfo(item.id)">
+                                            <i style="cursor: pointer;"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="left"
+                                            title="see more about" class="fa fa-ellipsis-v text-primary p-2" aria-hidden="true"></i>
+                                           </td>
+                                            <td>{{ item?.fullName }}</td>
+                                            <td>{{ item?.adresse }}</td>
+                                            <td>{{ item?.email }}</td>
+                                            <td>{{ item?.dateDemande | date :'medium' }}</td>
+                                            <td class="text-center">
+                                              <span *ngIf="item?.valid" [ngClass]="{
+                                                'badge-round-success' : item?.valid
+                                              }" >Yes</span>
+
+                                              <span  *ngIf="!item?.valid" [ngClass]="{
+                                                'badge-round-danger' : !item?.valid
+                                              }" >No</span>
+                                            </td>
+                                            <td>{{ item?.id }}</td>
+                                        </tr>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                          <th>ACTION</th>
+                                          <th>NOM COMPLET</th>
+                                          <th>ADRESSE</th>
+                                          <th>EMAIL</th>
+                                          <th>DATE DEMANDE</th>
+                                          <th class="text-center">VALID</th>
+                                          <th>ID</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <div class="card-footer bg-white" >
+
+                                <div class="container  my-2 mx-2">
+                                    <div class="pagination pagination-sm">
+                                        <div  *ngIf="true" class="page-item" >
+                                            <a class="page-link p-2" (click)="otherPage('last')">
+                                                <i class="fa fa-backward" aria-hidden="true"></i> last
+                                            </a>
+                                        </div>
+                                        <div  [ngClass]="{' page-item': true ,
+                                                    'active' :true }">
+                                            <a class="page-link p-2"> page  </a>
+                                        </div>
+
+                                        <div class="page-item" >
+                                          <a class="page-link p-2" (click)="otherPage('next')">
+                                                <i class="fa fa-fast-forward" aria-hidden="true"></i> next
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade p-2 rounded-0" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg ">
+                            <div class="modal-content">
+
+                                <div class="modal-header d-flex justify-content-end">
+                                    <button class="btn btn-primary btn-md m-2">valider</button> <button class="btn btn-danger btn-md m-2">annuler</button>
+                                </div>
+
+                                <div class="modal-body">
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate aspernatur repellendus deleniti blanditiis labore ipsam assumenda laudantium ullam dignissimos reiciendis, tempora perspiciatis earum laboriosam quae! Dignissimos error quam eaque.
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    </div>
+                </main>
+
+                <!-- <section th:insert="layouts/footer :: footer"></section> -->
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+

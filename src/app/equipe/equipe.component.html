@@ -1,0 +1,273 @@
+<div class="sb-nav-fixed">
+
+  <!-- inclusion d l'entete -->
+  <app-header></app-header>
+
+  <div id="layoutSidenav">
+
+
+    <!-- Menu inclusion  -->
+    <app-left-menu></app-left-menu>
+
+
+    <div id="layoutSidenav_content">
+      <main role="main" class="main">
+        <div class="container-fluid px-2">
+
+          <div class="container-fluid px-3">
+
+
+
+            <div class="modal fade " id="equipeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg serviceModal">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title text-muted " id="exampleModalLabel"> {{ info }} equipe</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="container" *ngIf="equipeObj?.service ">
+                       <table  class="table table-stripped table-bordered table-hover">
+                       <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                          </tr>
+                       </thead>
+                       <tbody>
+                         <tr>
+                            <td>{{ equipeObj?.service?.id}}</td>
+                            <td>{{ equipeObj?.service?.nom}}</td>
+                            <td>{{ equipeObj?.service?.description}}</td>
+                            <td>{{ equipeObj?.service?.price | currency : ' HTG '}}</td>
+                         </tr>
+                       </tbody>
+                       </table>
+
+                    </div>
+
+                    <form (ngSubmit)="onSubmit(equipe)" class="row my-form" novalidate #equipe="ngForm">
+
+                      
+
+                      <div class="row m-auto w-100">
+
+                        
+                        
+
+                        
+                        <div class="col-lg-12 col-md-12 col-sm-12 my-2">
+                          <label for="code">Code </label>
+                          <input type="text" id="code" minlength="5" maxlength="255" required name="code" ngModel
+                          [(ngModel)]="equipeObj.code" 
+                            placeholder="Saisir le code..." #code="ngModel" [ngClass]="{'form-control form-control-md outline rounded-0': true ,
+                                                   'is-valid' : code?.valid && code?.touched,
+                                                   'is-invalid' : code?.invalid && code?.touched
+                                              }" />
+
+                          <div class="text-danger" *ngIf=" code?.errors?.['required'] && code?.touched"> ce champ est
+                            requis !
+                          </div>
+
+
+                          <div class="text-danger" *ngIf=" code?.errors?.['minlength'] && code?.touched"> minlength 2
+                            characters!
+                          </div>
+
+
+
+                          <div class="text-danger" *ngIf=" code?.errors?.['maxlength'] && code?.touched"> maxlength 255
+                            characters !
+                          </div>
+
+
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                          <label for="nom">Equipe </label>
+                          <input type="text" id="nom" minlength="2" maxlength="50" required name="nom" ngModel
+                          [(ngModel)]="equipeObj.nom"
+                            placeholder="Nom de l'equipe..." #nom="ngModel" [ngClass]="{'form-control form-control-md outline rounded-0': true ,
+                                                   'is-valid' : nom?.valid && nom?.touched,
+                                                   'is-invalid' : nom?.invalid && nom?.touched
+                                              }" />
+
+                          <div class="text-danger" *ngIf=" nom?.errors?.['required'] && nom?.touched"> ce champ est
+                            requis !
+                          </div>
+
+
+                          <div class="text-danger" *ngIf=" nom?.errors?.['minlength'] && nom?.touched"> minlength 2
+                            characters!
+                          </div>
+
+
+
+                          <div class="text-danger" *ngIf=" nom?.errors?.['maxlength'] && nom?.touched"> maxlength 50
+                            characters !
+                          </div>
+
+
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+
+                          <label for="slogan">Slogan</label>
+                          <input type="text" minlength="5" maxlength="255" [(ngModel)]="equipeObj.slogan" required ngModel placeholder="Slogan ..."
+                            #slogan="ngModel" id="slogan" name="slogan" [ngClass]="{'form-control form-control-md rounded-0': true ,
+                                                 'is-valid' : slogan?.valid && slogan?.touched,
+                                                 'is-invalid' : slogan?.invalid && slogan?.touched
+                                             }" />
+
+
+                          <div class="text-danger" *ngIf="slogan?.errors?.['required'] && slogan?.touched"> ce champ est
+                            requis !
+                          </div>
+
+
+                          <div class="text-danger" *ngIf="slogan?.errors?.['min'] && slogan?.touched"> mminlength 1!
+                          </div>
+
+
+
+                          <div class="text-danger" *ngIf="slogan?.errors?.['max'] && slogan?.touched"> valeur trop grande
+                            !
+                          </div>
+                        </div>
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
+                          <label>Service a responsable</label>
+                          <select (change)="onChangeService($event)" class="form-control form-control-md rounded-0" id="service"  ngModel #service="ngModel" name="service">
+                            <option [disabled]="true" [selected]="true" > Selectionner le service responsable par l'equipe de {{ equipeObj?.nom }} </option>
+                            <option [value]="item?.id" [selected] =" equipeObj.service?.nom === item?.nom " *ngFor="let item of services"> {{ item?.nom }} </option>
+                          </select>
+
+                        </div>
+
+
+
+
+                         <input  type="hidden" class="form-control form-control-md col-12 mt-4" name="id" [(ngModel)]="equipeObj.id" ngModel #id="ngModel" />
+
+                      </div>
+
+
+                      <div class="container text-right mt-4 d-flex justify-content-center">
+
+                        <button type="button" (click)="clear(equipe)" class="btn btn-danger btn-md m-2">
+                          clear
+                          <i class="fa fa-close"></i>
+                        </button>
+                        <button type="submit" [disabled]="!equipe.valid" class="btn btn-primary btn-md m-2">
+                          save  <i class="fa fa-save"></i>
+                        </button>
+
+
+                      </div>
+
+                    </form>
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="container-fluid p-2">
+
+              <div class="d-flex justify-content-between my-4">
+
+                <div class="">
+                    <button (click)="openModal()" class="btn btn-primary btn-md"> <i class="fa fa-plus-circle"
+                        aria-hidden="true"></i> new equipe
+                    <i class="fa fa-new"></i>
+                   </button>
+                </div>
+
+                <div class="">
+                  <input class="input-search" type="search" #filter (keyup)="onSearch(filter.value)" placeholder="Search..." />
+                </div>
+
+               </div>
+
+              <mat-table mat-table matSort [dataSource]="equipeData" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="code" >
+                  <mat-header-cell *matHeaderCellDef class="header-col"> Code </mat-header-cell>
+                  <mat-cell *matCellDef="let item" > {{item?.code}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="nom" >
+                  <mat-header-cell *matHeaderCellDef class="header-col"> Nom </mat-header-cell>
+                  <mat-cell *matCellDef="let item">  {{ item?.nom }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="slogan" >
+                  <mat-header-cell *matHeaderCellDef class="header-col"> Slogan </mat-header-cell>
+                  <mat-cell *matCellDef="let item" >{{item?.slogan }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="createDate" >
+                  <mat-header-cell *matHeaderCellDef class="header-col"> Date </mat-header-cell>
+                  <mat-cell *matCellDef="let item" >{{item?.createDate | date : 'YYYY/mm/dd' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="service">
+                  <mat-header-cell *matHeaderCellDef class="header-col"> Service </mat-header-cell>
+                  <mat-cell *matCellDef="let item" > {{item?.service?.nom }} </mat-cell>
+                </ng-container>
+
+
+
+
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef class="header-col">  </mat-header-cell>
+                  <mat-cell *matCellDef="let item" >
+
+                    <div class="d-flex justify-content-center">
+
+                      <span (click)="openModalUpdate(item?.id)" class="m-1 action">
+                        <i class="fa fa-pencil-square-o text-primary" aria-hidden="true"></i>
+                      </span>
+
+                      <span (click)="onDelete(item?.id)" class="m-1 action">
+                        <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                      </span>
+
+                    </div>
+                  </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="header"></mat-header-row>
+                <mat-row class="line" *matRowDef="let row; columns: header;"></mat-row>
+              </mat-table>
+
+              <mat-paginator class="p-0 pagination-mat" [pageSize]="8" [pageSizeOptions]="[ 8, 10 , 15]" showFirstLastButtons></mat-paginator>
+
+            </div>
+
+          </div>
+
+
+        </div>
+      </main>
+
+    </div>
+
+
+  </div>
+
+
+
+</div>

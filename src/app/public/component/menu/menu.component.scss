@@ -1,0 +1,13 @@
+.public-menu {
+    box-shadow: rgb(31, 28, 28) 1px 1px 10px;
+    transition: .4s;
+   
+    li a {
+        font-weight: bold;
+        font-size: 16px;
+        text-decoration: none;
+        padding: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-transform: capitalize;
+    }
+}

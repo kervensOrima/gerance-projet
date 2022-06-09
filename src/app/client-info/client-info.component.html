@@ -1,0 +1,149 @@
+<div class="sb-nav-fixed">
+
+    <!-- inclusion d l'entete -->
+    <app-header></app-header>
+
+    <div id="layoutSidenav">
+
+
+        <!-- Menu inclusion  -->
+        <app-left-menu></app-left-menu>
+
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="main">
+                <div class="container-fluid py-2 m-0 info-header ">
+
+                  <div class="container mt-4 d-flex justify-content-end  ">
+
+                    <button (click)="retour()" class="btn btn-primary m-2"> <i class="fa fa-reply"></i> Retour</button>
+                    <button class="btn btn-primary m-2"> <i class="fa fa-check-circle"></i> Valider <i  class="fa fa-spinner fa-pulse"></i> </button>
+                    <button class="btn btn-primary m-2"> <i class="fa fa-reply"></i> Annuler <i  class="fa fa-spinner fa-pulse"></i> </button>
+                    <button class="btn btn-primary m-2"> <i class='fa fa-print'></i> Imprimer </button>
+
+                  </div>
+
+
+                </div>
+
+                <div style="margin-top: 50px;" [hidden]="!this.info" class="container px-2 py-2 my-2">
+
+                  <div class="card m-2">
+
+                    <div class="card-header text-white bg-primary rounded-0 text-bold">
+                      Information personnel
+                    </div>
+                    <div class="card-body">
+                      <p> <b class="text-left">Id </b> <small> {{ info?.id }} </small> </p>
+                      <p> <b class="text-left">Numero identite </b> <small> {{ info?.numeroIdentite }} </small> </p>
+                      <p> <b>Numero demande </b> <small> {{ info?.code }} </small> </p>
+                      <p> <b class="text-left">Nom complet </b> <small> {{ info?.fullName }} </small> </p>
+                      <p> <b>Adresse     </b> <small> {{ info?.adresse }} </small> </p>
+                      <p> <b>Email adresse </b> <small> {{ info?.email }} </small> </p>
+                      <p> <b>Sexe </b> <small> {{ info?.sexe }} </small> </p>
+                      <p> <b>Numero de tel </b> <small> {{ info?.phoneNumber }} </small> </p>
+                    </div>
+                  </div>
+
+
+                  <div class="card m-2">
+
+                    <div class="card-header text-white bg-primary rounded-0 ">
+                      Information demande
+                    </div>
+                    <div class="card-body">
+                      <p class=""> <b>Valider </b> <small>  <span *ngIf="info?.valid" [ngClass]="{
+                        'badge-round-success' : info?.valid
+                      }" >Yes</span>
+
+                      <span  *ngIf="!info?.valid" [ngClass]="{
+                        'badge-round-danger' : !info?.valid
+                      }" >No</span> </small> </p>
+
+
+                      <p> <b>Date demande </b> <small> {{ info?.dateDemande | date : 'medium' }} </small> </p>
+                      <p> <b>Date accomplissement </b> <small> {{ info?.dateAccomplissement | date : 'medium' }} </small> </p>
+                      <p> <b>Date disponible </b> <small> {{ info?.disponible | date : 'medium' }} </small> </p>
+                      <p> <b>Montant verser </b> <small> {{ info?.montantVerse | currency : ' HTG ' }} </small> </p>
+
+                    </div>
+                  </div>
+
+
+
+                  <div class="card m-2"*ngIf="info.services" >
+
+                    <div class="card-header text-white bg-primary rounded-0 ">
+                      Information demande
+                    </div>
+                    <div class="card-body">
+
+                       <table class="table table-bordered table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Service</th>
+                              <th>Prix</th>
+                              <th>Active</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr *ngFor="let service of info.services">
+                                <td>  <small>  {{ service?.id  }} </small>  </td>
+                                <td>  <small>  {{ service?.nom | uppercase }} </small>  </td>
+                                <td>  <small>  {{ service?.price | currency : ' HTG ' }} </small>  </td>
+                                <td>  <small>
+                                          <span *ngIf="service?.active" [ngClass]="{
+                                          'badge-round-success' : service?.active
+                                         }" >Yes</span>
+
+                                        <span  *ngIf="!service?.active" [ngClass]="{
+                                          'badge-round-danger' : !service?.active
+                                          }" >No
+                                        </span>
+                                  </small>
+                              </td>
+                              <td class="image text-center">
+                                <img [alt]="service?.description" [title]="service?.description"
+                                [src]=" 'http://localhost:9090/photo/' + service?.imageURL"
+                                class="card-im-top image-card " />
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          <tfoot>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th>  {{ total | currency : ' HTG ' }} </th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                          </tfoot>
+                       </table>
+
+
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+
+                <div [hidden]="info" class="text-center">
+                  <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+
+            </main>
+
+            <!-- <section th:insert="layouts/footer :: footer"></section> -->
+        </div>
+
+    </div>
+
+</div>

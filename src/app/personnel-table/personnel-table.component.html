@@ -1,0 +1,161 @@
+<div class="sb-nav-fixed">
+
+    <!-- inclusion d l'entete -->
+    <app-header></app-header>
+
+    <div id="layoutSidenav">
+
+
+        <!-- Menu inclusion  -->
+        <app-left-menu></app-left-menu>
+
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="main">
+                <div class="container-fluid px-2 py-4">
+
+
+                    
+                    <div class="modal fade " id="phoneAndAdresseModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"> </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                   {{ personnel | json }} <br/>
+                                   <h3>Numero(s) de telephone joignable de {{ personnel?.fullName  }} </h3>
+                                   <ul class="list-group">
+                                    <li *ngFor="let item in personnel?.phones" class="list-group-item"> {{ item?.id }}   {{ item?.phone }} </li>
+                                   </ul>
+
+
+                                   <h3>Profession de {{ personnel?.fullName }} </h3>
+                                   <ul class="list-group">
+                                    <li *ngFor="let item in personnel?.phones" class="list-group-item"> {{ item?.id }}   {{ item?.phone }} </li>
+                                   </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                   <div class="container-fluid p-2">
+
+                        <div class="d-flex justify-content-end my-3 mx-2">
+                            <input class="input-search" type="search" #filter (keyup)="onSearch(filter.value)" placeholder="Search..." />
+                        </div>
+
+                        <mat-table mat-table matSort  [dataSource]="personnelData" class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="fullName">
+                                <mat-header-cell *matHeaderCellDef  class="header-col"> Nom complet </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.fullName | uppercase }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="code" >
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Code </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{ item?.code }}  </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="adresse">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Adresse </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.adresse | lowercase }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="email">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> @Email </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.email | lowercase }} </mat-cell>
+                            </ng-container>
+
+
+                            <!-- <ng-container matColumnDef="sexe">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Sexe </mat-header-cell>
+                                <mat-cell *matCellDef="let item" >
+                                    &nbsp;
+                                    &nbsp;
+                                        <small *ngIf="item?.sexe === 'F' "
+                                            class="badge bg-primary"> F </small>
+
+                                        <small *ngIf="item?.sexe === 'M' "
+                                            class="badge bg-primary"> M </small>
+                                </mat-cell>
+                            </ng-container> -->
+
+
+                            <ng-container matColumnDef="actif">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Actif </mat-header-cell>
+                                <mat-cell *matCellDef="let item" > 
+                                         <small *ngIf="item?.actif"
+                                            class="m-2 badge bg-success">Yes</small>
+
+                                        <small *ngIf="!item?.actif"
+                                            class="m-2 badge bg-danger">No</small> 
+                                </mat-cell>
+                            </ng-container>
+
+
+
+                            <ng-container matColumnDef="salaire">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Salaire </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.salaire | currency : ' HTG '}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="equipe">
+                                <mat-header-cell *matHeaderCellDef class="header-col"> Equipe </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item?.equipe?.nom }} </mat-cell>
+                            </ng-container>
+
+                           
+
+                            <ng-container matColumnDef="action" >
+                                <mat-header-cell *matHeaderCellDef class="header-col">  </mat-header-cell>
+                                <mat-cell *matCellDef="let item">
+
+                                    <div class="d-flex justify-content-end">
+
+                                        <span class="m-1 action" (click)="onUpdatePersonnel( item?.id )">
+                                            <i class="fa fa-pencil-square-o text-primary" aria-hidden="true"></i>
+                                        </span>
+
+                                        <span class="m-1 action" (click)="onViewPersonnel(item?.id)">
+                                            <i class="fa fa-search text-primary" aria-hidden="true"></i>
+                                        </span>
+
+
+                                        <span (click)="onDelete( item?.id )" class="m-1 action">
+                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                                        </span>
+
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+
+                            <mat-header-row *matHeaderRowDef="header"></mat-header-row>
+                            <mat-row class="line" *matRowDef="let row; columns: header;"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator class="p-1 pagination-mat"  [pageSize]="8" [pageSizeOptions]="[ 8, 10 , 15]" showFirstLastButtons>
+                        </mat-paginator>
+
+                    </div> 
+
+
+
+                </div>
+            </main>
+
+        </div>
+
+
+    </div>
+</div> 
